@@ -16,7 +16,7 @@
 - has_many :purchase_histories
 
 
-## productsテーブル
+## itemsテーブル
 
 | Column           | Type         | Options                       |
 | ----------------- | ------------ | ------------------------------ |
