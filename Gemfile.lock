@@ -111,11 +111,20 @@ GEM
     mimemagic (0.3.5)
     mini_magick (4.11.0)
     mini_mime (1.0.2)
+<<<<<<< Updated upstream
+=======
+    mini_portile2 (2.5.0)
+>>>>>>> Stashed changes
     minitest (5.14.4)
     msgpack (1.4.2)
     mysql2 (0.5.3)
     nio4r (2.5.7)
+<<<<<<< Updated upstream
     nokogiri (1.11.2-x86_64-darwin)
+=======
+    nokogiri (1.11.2)
+      mini_portile2 (~> 2.5.0)
+>>>>>>> Stashed changes
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.20.1)
