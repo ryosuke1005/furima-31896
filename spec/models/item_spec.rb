@@ -4,7 +4,6 @@ RSpec.describe Item, type: :model do
   describe '#create' do
     before do
       @item = FactoryBot.build(:item)
-      @user = FactoryBot.build(:user)
     end
 
     describe '商品出品' do
@@ -69,6 +68,31 @@ RSpec.describe Item, type: :model do
           @item.price = '１４５'
           @item.valid?
           expect(@item.errors.full_messages).to include("Price Out of setting range", "Price Half-width number.")
+        end
+        it 'statusに0の値が選択された時は登録できない' do
+          @item.status_id = '0'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Status Select")
+        end
+        it 'postageに0の値が選択された時は登録できない' do
+          @item.postage_id = '0'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Postage Select")
+        end
+        it 'prefectureに0の値が選択された時は登録できない' do
+          @item.prefecture_id = '0'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Prefecture Select")
+        end
+        it 'shipping_dateに0の値が選択された時は登録できない' do
+          @item.shipping_date_id = '0'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Shipping date Select")
+        end
+        it 'categoryに0の値が選択された時は登録できない' do
+          @item.category_id = '0'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Category Select")
         end
       end
     end

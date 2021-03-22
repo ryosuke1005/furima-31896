@@ -17,14 +17,8 @@ class Item < ApplicationRecord
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "Out of setting range"}
     validates :price, numericality: { only_integer: true, message: "Half-width number." }
   end
-<<<<<<< Updated upstream
   with_options presence: true, numericality: { other_than: 0, message: "Select" } do
     validates :status_id 
-=======
-
-  with_options presence: true, numericality: { other_than: 0, message: "Select" } do
-    validates :status_id
->>>>>>> Stashed changes
     validates :postage_id
     validates :prefecture_id
     validates :shipping_date_id
