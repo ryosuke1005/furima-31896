@@ -69,27 +69,42 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include("Price Out of setting range", "Price Half-width number.")
         end
-        it 'statusに0の値が選択された時は登録できない' do
+        it 'priceが全角文字では登録できない' do
+          @item.price = '１２３'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price Out of setting range", "Price Half-width number.")
+        end
+        it 'priceは半角英数混合では登録できない' do
+          @item.price = 'abc123'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price Out of setting range")
+        end
+        it 'priceは半角英語だけでは登録できない' do
+          @item.price = 'abc'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price Out of setting range", "Price Half-width number.")
+        end
+        it 'statusに値が選択された時は登録できない' do
           @item.status_id = '0'
           @item.valid?
           expect(@item.errors.full_messages).to include("Status Select")
         end
-        it 'postageに0の値が選択された時は登録できない' do
+        it 'postageに値が選択された時は登録できない' do
           @item.postage_id = '0'
           @item.valid?
           expect(@item.errors.full_messages).to include("Postage Select")
         end
-        it 'prefectureに0の値が選択された時は登録できない' do
+        it 'prefectureに値が選択された時は登録できない' do
           @item.prefecture_id = '0'
           @item.valid?
           expect(@item.errors.full_messages).to include("Prefecture Select")
         end
-        it 'shipping_dateに0の値が選択された時は登録できない' do
+        it 'shipping_dateに値が選択された時は登録できない' do
           @item.shipping_date_id = '0'
           @item.valid?
           expect(@item.errors.full_messages).to include("Shipping date Select")
         end
-        it 'categoryに0の値が選択された時は登録できない' do
+        it 'categoryに値が選択された時は登録できない' do
           @item.category_id = '0'
           @item.valid?
           expect(@item.errors.full_messages).to include("Category Select")
