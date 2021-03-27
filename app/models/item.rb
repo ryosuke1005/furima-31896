@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_date
 
   with_options presence: true do
-    validates :image
+    validates :image, unless: :was_attached?
     validates :name
     validates :explain
     validates :price
@@ -23,5 +23,9 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :shipping_date_id
     validates :category_id
+  end
+
+  def was_attached?
+    self.image.attached?
   end
 end
