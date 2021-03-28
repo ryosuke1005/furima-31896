@@ -24,4 +24,8 @@ class Item < ApplicationRecord
     validates :shipping_date_id
     validates :category_id
   end
+
+  def was_attached?
+    self.image.attached?
+  end
 end
