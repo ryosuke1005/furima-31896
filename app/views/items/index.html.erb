@@ -128,7 +128,7 @@
     <% if @items.present? %>
       <% @items.each do |item| %>
         <li class='list'>
-          <%= link_to items_path(item.id), method: :get do %>
+          <%= link_to item_path(item.id), method: :get do %>
           <div class='item-img-content'>
             <%= image_tag item.image, class: "item-img" if item.image.attached? %>
             <% if @user_item.present? %>
@@ -170,8 +170,8 @@
           </div>
           <% end %>
         </li>
+      <% end %>
     </ul>
-    <% end %>
   </div>
 </div>
 <%= link_to new_item_path, class: 'purchase-btn' do %>
