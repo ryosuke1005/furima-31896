@@ -37,7 +37,7 @@ RSpec.describe UserOrder, type: :model do
         expect(@userorder.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'prefectureが0が選択されていると購入できない' do
-        @userorder.prefecture = '0'
+        @userorder.prefecture = 0
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Prefecture Select")
       end
