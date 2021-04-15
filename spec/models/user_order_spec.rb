@@ -66,6 +66,11 @@ RSpec.describe UserOrder, type: :model do
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Phone number Contains hyphen(-)")
       end
+      it 'phone_numberが英数混合では購入できない' do
+        @userorder.phone_number = '0901234abcd'
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("Phone number Contains hyphen(-)")
+      end
       it "tokenが空では購入できない" do
         @userorder.token = ''
         @userorder.valid?
