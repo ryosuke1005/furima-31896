@@ -29,18 +29,20 @@ class ItemsController < ApplicationController
   end
 
   def edit
-  end
-
-  def show
-    
+    if current_user == @item.user
+    redirect_to root_path
+    end
   end
 
   def update
-    if @item.update(item_params) 
-      redirect_to item_path
-    else 
+    if @item.update(item_params)
+      redirect_to root_path
+    else
       render :edit
     end
+  end
+
+  def show
   end
 
 

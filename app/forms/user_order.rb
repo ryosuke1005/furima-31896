@@ -1,14 +1,16 @@
 class UserOrder
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :name, :name_reading, :nickname, :postal_code, :prefecture, :city, :house_number, :phone_number, :building_name, :price, :token
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture, :city, :house_number, :phone_number, :building_name, :price, :token
 
   with_options presence: true do
+    validates :user_id
+    validates :item_id
     validates :token
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :prefecture, numericality: { other_than: 0, message: "Select" }
     validates :city
     validates :house_number
-    validates :phone_number, length: { maximum: 11 }, format: { with: /\A\d{11}\z/, message: 'Contains hyphen(-)' }
+    validates :phone_number, length: { maximum: 11 }, format: { with: /\A\d{1,11}\z/, message: 'Contains hyphen(-)' }
   end
 
   def save

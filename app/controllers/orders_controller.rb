@@ -1,16 +1,11 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
+  before_action :order_set, only: [:index, :create]
+
 
   def index
     @order = UserOrder.new
-    if @item.user_id == current_user.id || @item.order!= nil
-      return redirect_to root_path
-    end
-  end
-
-  def new
-    @order = Order.new
   end
 
   def create
@@ -37,6 +32,12 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def order_set
+    if @item.user_id == current_user.id || @item.order!= nil
+      return redirect_to root_path
+    end
   end
 
 end

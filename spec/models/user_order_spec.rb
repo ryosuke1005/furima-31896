@@ -36,6 +36,11 @@ RSpec.describe UserOrder, type: :model do
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it 'prefectureが0が選択されていると購入できない' do
+        @userorder.prefecture = '0'
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("Prefecture Select")
+      end
       it 'cityが空では購入できない' do
         @userorder.city = ''
         @userorder.valid?
@@ -65,6 +70,16 @@ RSpec.describe UserOrder, type: :model do
         @userorder.token = ''
         @userorder.valid?
         expect(@userorder.errors.full_messages).to include("Token can't be blank")
+      end
+      it "user_idが空では購入できない" do
+        @userorder.user_id = ''
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが空では購入できない" do
+        @userorder.item_id = ''
+        @userorder.valid?
+        expect(@userorder.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
