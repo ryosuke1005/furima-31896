@@ -54,35 +54,35 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include("Price can't be blank")
         end
-        it 'priceが300円未満だと登録できない' do
+        it 'priceの範囲が300より上でないと登録できない' do
           @item.price = 299
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price Out of setting range")
+          expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
         end
-        it 'priceが9,999,999円を超過すると登録できない' do
+        it 'priceの範囲が9,999,999円を超過すると登録できない' do
           @item.price = 10000000
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price Out of setting range")
+          expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
         end
         it 'priceが半角数字以外では登録できない' do
-          @item.price = '１４５'
+          @item.price = 'abc11'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price Out of setting range", "Price Half-width number.")
+          expect(@item.errors.full_messages).to include("Price is not a number")
         end
         it 'priceが全角文字では登録できない' do
           @item.price = '１２３'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price Out of setting range", "Price Half-width number.")
+          expect(@item.errors.full_messages).to include("Price is not a number")
         end
         it 'priceは半角英数混合では登録できない' do
           @item.price = 'abc123'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price Out of setting range")
+          expect(@item.errors.full_messages).to include("Price is not a number")
         end
         it 'priceは半角英語だけでは登録できない' do
           @item.price = 'abc'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price Out of setting range", "Price Half-width number.")
+          expect(@item.errors.full_messages).to include("Price is not a number")
         end
         it 'statusに値が選択された時は登録できない' do
           @item.status_id = '0'
